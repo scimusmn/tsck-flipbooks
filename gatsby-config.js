@@ -22,6 +22,17 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-contentful',
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        forceFullSync: true,
+        useNameForId: false,
+        environment: process.env.CONTENTFUL_ENVIRONMENT,
+        host: process.env.CONTENTFUL_HOST,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'app-template',
