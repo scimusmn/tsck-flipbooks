@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Video from '../../components/Video';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
@@ -24,6 +25,10 @@ export const pageQuery = graphql`
             altText
           }
           media {
+            file {
+              contentType
+              url
+            }
             gatsbyImageData(
               width: 250
               layout: FIXED
@@ -40,16 +45,32 @@ const Flipbook = ({ data }) => {
   const { contentfulFlipbook } = data;
   const { slides } = contentfulFlipbook;
 
+  console.log(slides);
+
+  const getAltText = (altObj) => {
+    if (altObj) return altObj.altText;
+    return 'Image';
+  };
+
   const renderSlides = slides.map((slide) => (
     <SwiperSlide key={slide.id}>
-      <h1>{slide.title}</h1>
-      {renderRichText(slide.body)}
-      <GatsbyImage
-        image={getImage(slide.media.media)}
-        alt={slide.media.altText || 'Image'}
-        loading="eager"
-      />
-      <pre>{slide.media.credit}</pre>
+      {({ isActive }) => (
+        <div>
+          <h1>{slide.title}</h1>
+          {renderRichText(slide.body)}
+          {(slide.media.media.file.contentType).includes('image') && (
+          <GatsbyImage
+            image={getImage(slide.media.media)}
+            alt={getAltText(slide.media.altText)}
+            loading="eager"
+          />
+          )}
+          {(slide.media.media.file.contentType).includes('video') && (
+          <Video src={slide.media.media.file.url} active={isActive} />
+          )}
+          <pre>{slide.media.credit}</pre>
+        </div>
+      )}
     </SwiperSlide>
   ));
 
