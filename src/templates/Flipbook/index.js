@@ -45,8 +45,6 @@ const Flipbook = ({ data }) => {
   const { contentfulFlipbook } = data;
   const { slides } = contentfulFlipbook;
 
-  console.log(slides);
-
   const getAltText = (altObj) => {
     if (altObj) return altObj.altText;
     return 'Image';
