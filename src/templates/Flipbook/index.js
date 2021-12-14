@@ -4,11 +4,18 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
+import SwiperCore, {
+  Pagination,
+} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Video from '../../components/Video';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
+// import 'swiper/css/pagination';
+
+// install Swiper modules
+SwiperCore.use([Pagination]);
 
 export const pageQuery = graphql`
   fragment FlipbookFragment on ContentfulFlipbook {
@@ -54,37 +61,51 @@ export const pageQuery = graphql`
 const Flipbook = ({ data }) => {
   const { enContent, arContent } = data;
 
-  // Construct slide array containing both languages
-  const slides = enContent.slides.map((slide, i) => ({ en: slide, ar: arContent.slides[i] }));
+  // Use English for iterating over structure
+  const { slides } = enContent;
 
   const getAltText = (altObj) => {
     if (altObj) return altObj.altText;
     return 'Image';
   };
 
-  const renderSlides = slides.map((slide) => (
-    <SwiperSlide key={slide.en.id}>
-      {({ isActive }) => (
-        <div>
-          <h1>{slide.en.title}</h1>
-          <h2>{slide.ar.title}</h2>
-          {renderRichText(slide.en.body)}
-          {renderRichText(slide.ar.body)}
-          {(slide.en.media.media.file.contentType).includes('image') && (
-            <GatsbyImage
-              image={getImage(slide.en.media.media)}
-              alt={getAltText(slide.en.media.altText)}
-              loading="eager"
-            />
-          )}
-          {(slide.en.media.media.file.contentType).includes('video') && (
-            <Video src={slide.en.media.media.file.url} active={isActive} />
-          )}
-          <pre>{slide.en.media.credit}</pre>
-        </div>
-      )}
-    </SwiperSlide>
-  ));
+  const renderSlides = slides.map((slide, i) => {
+    const arSlide = arContent.slides[i];
+    return (
+      <SwiperSlide key={slide.id}>
+        {({ isActive }) => (
+          <div>
+            {/* Arabic */}
+            <div className="ar">
+              <h2>{arSlide.title}</h2>
+              {renderRichText(arSlide.body)}
+            </div>
+            {/* English */}
+            <div className="en">
+              <h2>{slide.title}</h2>
+              {renderRichText(slide.body)}
+            </div>
+            {/* Media */}
+            <div className="media">
+              {
+              (slide.media.media.file.contentType).includes('video')
+                ? <Video src={slide.media.media.file.url} active={isActive} />
+                : (
+                  <GatsbyImage
+                    image={getImage(slide.media.media)}
+                    alt={getAltText(slide.media.altText)}
+                    loading="eager"
+                  />
+                )
+              }
+              <pre>{slide.media.credit}</pre>
+            </div>
+
+          </div>
+        )}
+      </SwiperSlide>
+    );
+  });
 
   return (
     <>
@@ -92,6 +113,11 @@ const Flipbook = ({ data }) => {
         spaceBetween={0}
         slidesPerView={1}
         centeredSlides
+        // navigation
+        // direction="vertical"
+        // pagination={{
+        //   clickable: true,
+        // }}
       >
         {renderSlides}
       </Swiper>
