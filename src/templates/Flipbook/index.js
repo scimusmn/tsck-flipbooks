@@ -76,10 +76,12 @@ const Flipbook = ({ data }) => {
             {/* Arabic */}
             <div className="ar">
               <h2>{arSlide.title}</h2>
+              <div className="separator" />
               {renderRichText(arSlide.body)}
             </div>
             {/* English */}
             <div className="en">
+              <div className="separator" />
               <h2>{slide.title}</h2>
               {renderRichText(slide.body)}
             </div>
