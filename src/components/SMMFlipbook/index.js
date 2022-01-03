@@ -1,6 +1,4 @@
-/* eslint no-console: 0 */
 import React from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
@@ -8,62 +6,27 @@ import SwiperCore, {
   Pagination, Navigation,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Video from '../../components/Video';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
+
+import Video from '../Video';
 // import 'swiper/css/pagination';
 
 // Install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
-export const pageQuery = graphql`
-  fragment FlipbookFragment on ContentfulFlipbook {
-    slug
-    slides {
-      id
-      title
-      body {
-        raw
-      }
-      media {
-        credit
-        altText {
-          altText
-        }
-        media {
-          file {
-            contentType
-            url
-          }
-          gatsbyImageData(
-            width: 250
-            layout: FIXED
-            placeholder: BLURRED
-          )
-        }
-      }
-    }
-  } 
-  query ($slug: String!) {
-    enContent:contentfulFlipbook(
-      node_locale: {eq:"en-US"},
-      slug: { eq: $slug }) {
-        ...FlipbookFragment
-      }
-    arContent:contentfulFlipbook(
-      node_locale: {eq:"ar"},
-      slug: { eq: $slug }) {
-        ...FlipbookFragment
-      }
-  }
-`;
-
-const Flipbook = ({ data }) => {
+const SMMFlipbook = ({ data }) => {
   const { enContent, arContent } = data;
 
-  // Use English for common structure
+  // TODO: Can we make this locale agnostic?
+  // Use "first" locale for structure instead of English
+
+  // TODO: Can we make this configurable between toggable languages v dual language?
+
+  // Use first locale (language) for structure
   const { slides } = enContent;
+  const { accentColor } = enContent;
 
   const getAltText = (altObj) => {
     if (altObj) return altObj.altText;
@@ -73,7 +36,7 @@ const Flipbook = ({ data }) => {
   const renderSlides = slides.map((slide, i) => {
     const arSlide = arContent.slides[i];
     return (
-      <SwiperSlide key={slide.id}>
+      <SwiperSlide key={slide.id} style={{ background: `radial-gradient(93.07% 84.18% at 100% 0%, ${accentColor} 0%, #0d003a 71.35%)` }}>
         {({ isActive }) => (
           <div>
             {/* Arabic */}
@@ -109,25 +72,23 @@ const Flipbook = ({ data }) => {
   });
 
   return (
-    <div className={enContent.slug}>
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={1}
-        centeredSlides
-        navigation
-        direction="vertical"
-        pagination={{
-          clickable: true,
-        }}
-      >
-        {renderSlides}
-      </Swiper>
-    </div>
+    <Swiper
+      spaceBetween={0}
+      slidesPerView={1}
+      centeredSlides
+      navigation
+      direction="vertical"
+      pagination={{
+        clickable: true,
+      }}
+    >
+      {renderSlides}
+    </Swiper>
   );
 };
 
-Flipbook.propTypes = {
+SMMFlipbook.propTypes = {
   data: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default Flipbook;
+export default SMMFlipbook;
