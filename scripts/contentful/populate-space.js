@@ -29,7 +29,7 @@ const requireEnvVars = (vars) => {
 requireEnvVars(['CONTENTFUL_SPACE_ID', 'CONTENTFUL_MANAGEMENT_TOKEN']);
 
 rl.question('Enter path to contentful json: ', (jsonPath) => {
-  console.log(`\nThis will populate Space ${chalk.green(process.env.CONTENTFUL_SPACE_ID)} with the content and model from ${chalk.green(jsonPath)}. Continue?`);
+  console.log(`\nThis will populate Space ${chalk.green(process.env.CONTENTFUL_SPACE_ID)} with content from ${chalk.green(jsonPath)}. Continue?`);
   rl.question('[Y/N]? ', (answerYesNo) => {
     if (answerYesNo.toLowerCase().includes('y')) {
       console.log(chalk.green('\nPopulating space...'));

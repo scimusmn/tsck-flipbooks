@@ -22,15 +22,16 @@ body {
 }
 
 .swiper-slide {
-  background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
+  background: radial-gradient(96.3% 87.1% at 100% 0%, #9402ee 0%, #0d003a 71.35%);
   height: 100%;
   overflow: hidden;
   position: relative;
   width: 100%;
 }
 
+/* Override bg gradient for specific flipbooks */
 .flipbook-example-forest .swiper-slide {
-  background: radial-gradient(96.3% 87.1% at 100% 0%, #9402ee 0%, #0d003a 71.35%);
+  background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
 }
 
 /* Hide default Swiper nav */
