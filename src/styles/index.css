@@ -13,7 +13,13 @@ body {
   direction: rtl;
 }
 
-/* Customize default Swiper styling */
+.media {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+/* Customize Swiper */
 .swiper-container {
   height: 100vh;
   overflow: hidden;
@@ -29,7 +35,7 @@ body {
   width: 100%;
 }
 
-/* Override bg gradient for specific flipbooks */
+/* Gradients for specific flipbooks */
 .flipbook-example-forest .swiper-slide {
   background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
 }

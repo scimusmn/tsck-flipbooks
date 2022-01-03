@@ -4,17 +4,13 @@ import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import SwiperCore, {
-  Pagination, Navigation,
-} from 'swiper';
+import SwiperCore, { Pagination, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Video from '../../components/Video';
 
 import 'swiper/swiper-bundle.min.css';
 import 'swiper/swiper.min.css';
-// import 'swiper/css/pagination';
 
-// Install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
 export const pageQuery = graphql`
@@ -37,7 +33,8 @@ export const pageQuery = graphql`
             url
           }
           gatsbyImageData(
-            width: 250
+            width: 950
+            height: 1080
             layout: FIXED
             placeholder: BLURRED
           )
