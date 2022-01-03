@@ -44,5 +44,12 @@ module.exports = {
         icon: 'src/images/smm.png',
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: ['montserrat:400,500,700', 'open sans:400', 'tajawal:400,500,700'],
+        display: 'swap',
+      },
+    },
   ],
 };
