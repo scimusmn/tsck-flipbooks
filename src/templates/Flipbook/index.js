@@ -98,7 +98,7 @@ const Flipbook = ({ data }) => {
                   />
                 )
               }
-              <pre>{slide.media.credit}</pre>
+              <span className="credit">{slide.media.credit}</span>
             </div>
 
           </div>

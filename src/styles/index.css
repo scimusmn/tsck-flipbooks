@@ -93,6 +93,15 @@ p {
   top: 0;
 }
 
+.credit {
+  font-size: 12px;
+  height: 0;
+  left: 15px;
+  position: absolute;
+  top: 1060px;
+  width: 1000px;
+}
+
 /* Customize Swiper */
 .swiper-container {
   height: 100vh;
