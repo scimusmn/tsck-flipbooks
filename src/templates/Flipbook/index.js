@@ -32,12 +32,17 @@ export const pageQuery = graphql`
             contentType
             url
           }
-          gatsbyImageData(
-            width: 950
-            height: 1080
-            layout: FIXED
-            placeholder: BLURRED
-          )
+          localFile {
+            publicURL
+            childImageSharp {
+              gatsbyImageData(
+                width: 950
+                height: 1080
+                layout: FIXED
+                placeholder: BLURRED
+              )
+            }
+          }
         }
       }
     }
@@ -89,10 +94,10 @@ const Flipbook = ({ data }) => {
             <div className="media">
               {
               (slide.media.media.file.contentType).includes('video')
-                ? <Video src={slide.media.media.file.url} active={isActive} />
+                ? <Video src={slide.media.media.localFile.publicURL} active={isActive} />
                 : (
                   <GatsbyImage
-                    image={getImage(slide.media.media)}
+                    image={getImage(slide.media.media.localFile)}
                     alt={getAltText(slide.media.altText)}
                     loading="eager"
                   />

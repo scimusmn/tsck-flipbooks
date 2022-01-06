@@ -26,6 +26,7 @@ module.exports = {
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+        downloadLocal: true,
         forceFullSync: true,
         useNameForId: false,
         environment: process.env.CONTENTFUL_ENVIRONMENT,
@@ -42,13 +43,6 @@ module.exports = {
         theme_color: '#000000',
         display: 'standalone',
         icon: 'src/images/smm.png',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-google-fonts',
-      options: {
-        fonts: ['montserrat:400,500,700', 'open sans:400', 'tajawal:400,500,700'],
-        display: 'swap',
       },
     },
   ],

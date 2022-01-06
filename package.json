@@ -5,9 +5,11 @@
   "version": "1.0.0",
   "author": "@scimusmn",
   "dependencies": {
+    "@fontsource/montserrat": "^4.5.1",
+    "@fontsource/open-sans": "^4.5.2",
+    "@fontsource/tajawal": "^4.5.0",
     "dotenv": "^8.2.0",
     "gatsby": "^4.2.0",
-    "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-image": "^2.2.0",
     "gatsby-plugin-manifest": "^4.2.0",
     "gatsby-plugin-react-helmet": "^5.2.0",
