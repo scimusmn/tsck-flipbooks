@@ -64,48 +64,63 @@ export const pageQuery = graphql`
 const Flipbook = ({ data }) => {
   const { enContent, arContent } = data;
 
-  // Use English for common structure
-  const { slides } = enContent;
+  // Create array of multi-locale slides
+  const slides = enContent.slides.map((slide, i) => ({
+    en: enContent.slides[i],
+    ar: arContent.slides[i],
+  }));
 
   const getAltText = (altObj) => {
     if (altObj) return altObj.altText;
     return 'Image';
   };
 
-  const renderSlides = slides.map((slide, i) => {
-    const arSlide = arContent.slides[i];
+  const renderTitleSlide = (slide) => (
+    <SwiperSlide key={slide.id}>
+      <div className="title-slide">
+        <div className="separator" />
+        {/* Render title for each locale */}
+        {Object.keys(slide).map((locale) => (
+          <div className={locale} key={locale}>
+            <h1>{slide[locale].title}</h1>
+          </div>
+        ))}
+      </div>
+    </SwiperSlide>
+  );
+
+  const renderSlides = slides.map((slide) => {
+    // If only title field exists, render as a "Title Slide"
+    const isTitleSlide = !slide.en.media && !slide.en.body;
+    if (isTitleSlide) return (renderTitleSlide(slide));
+
     return (
       <SwiperSlide key={slide.id}>
         {({ isActive }) => (
           <div>
-            {/* Arabic */}
-            <div className="ar">
-              <h2>{arSlide.title}</h2>
-              <div className="separator" />
-              {renderRichText(arSlide.body)}
-            </div>
-            {/* English */}
-            <div className="en">
-              <div className="separator" />
-              <h2>{slide.title}</h2>
-              {renderRichText(slide.body)}
-            </div>
+            {/* Render title/body for each locale */}
+            {Object.keys(slide).map((locale) => (
+              <div className={locale} key={locale}>
+                <h2>{slide[locale].title}</h2>
+                <div className="separator" />
+                {renderRichText(slide[locale].body)}
+              </div>
+            ))}
             {/* Media */}
             <div className="media">
               {
-              (slide.media.media.file.contentType).includes('video')
-                ? <Video src={slide.media.media.localFile.publicURL} active={isActive} />
+              (slide.en.media.media.file.contentType).includes('video')
+                ? <Video src={slide.en.media.media.localFile.publicURL} active={isActive} />
                 : (
                   <GatsbyImage
-                    image={getImage(slide.media.media.localFile)}
-                    alt={getAltText(slide.media.altText)}
+                    image={getImage(slide.en.media.media.localFile)}
+                    alt={getAltText(slide.en.media.altText)}
                     loading="eager"
                   />
                 )
               }
-              <span className="credit">{slide.media.credit}</span>
+              <span className="credit">{slide.en.media.credit}</span>
             </div>
-
           </div>
         )}
       </SwiperSlide>

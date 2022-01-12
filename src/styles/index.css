@@ -16,6 +16,10 @@ h2 {
   line-height: 32px;
 }
 
+.title-slide h1 {
+  background-color: red !important;
+}
+
 p {
   color: #fff;
   font-size: 25px;
