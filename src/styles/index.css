@@ -1,7 +1,7 @@
 html,
 body {
   background-color: #0d003a;
-  color: white;
+  color: #fff;
   font-family: "Open Sans", sans-serif;
   height: 100%;
   margin: 0;
@@ -10,18 +10,12 @@ body {
 }
 
 h2 {
-  color: #fff;
   font-size: 20px;
   font-weight: 500;
   line-height: 32px;
 }
 
-.title-slide h1 {
-  background-color: red !important;
-}
-
 p {
-  color: #fff;
   font-size: 25px;
   font-weight: 400;
   line-height: 32px;
@@ -42,7 +36,7 @@ p {
   width: 560px;
 }
 
-.ar p {
+.ar .body {
   left: 1131px;
   position: absolute;
   top: 215px;
@@ -55,11 +49,12 @@ p {
   left: 1114px;
   letter-spacing: 8.75px;
   position: absolute;
+  text-transform: uppercase;
   top: 624px;
   width: 607px;
 }
 
-.en p {
+.en .body {
   height: 194px;
   left: 1114px;
   position: absolute;
@@ -72,11 +67,6 @@ p {
   height: 3px;
   position: absolute;
   width: 571px;
-}
-
-/* Gradients for specific flipbooks */
-.flipbook-example-forest .separator {
-  background-image: linear-gradient(90deg, #ffe2e2 -0.87%, #f00 1.21%, #0d003a 82.66%, #0d003a 99.37%);
 }
 
 .ar .separator {
@@ -108,7 +98,8 @@ p {
   width: 1000px;
 }
 
-/* Customize Swiper */
+/* Swiper customization */
+
 .swiper-container {
   height: 100vh;
   overflow: hidden;
@@ -117,19 +108,13 @@ p {
 }
 
 .swiper-slide {
-  background: radial-gradient(96.3% 87.1% at 100% 0%, #9402ee 0%, #0d003a 71.35%);
+  background: linear-gradient(180deg, #0d003a 0%, #242466 100%);
   height: 100%;
   overflow: hidden;
   position: relative;
   width: 100%;
 }
 
-/* Gradients for specific flipbooks */
-.flipbook-example-forest .swiper-slide {
-  background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
-}
-
-/* Hide default Swiper nav */
 .swiper-button-next::after,
 .swiper-button-prev::after {
   content: "" !important;
@@ -137,26 +122,31 @@ p {
 
 .swiper-button-prev,
 .swiper-button-next {
-  background-image: url(../images/nav-next.svg);
+  background-image: url(../images/nav-arrow.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   height: 60px !important;
-  left: 90% !important;
+  left: 92.6% !important;
   width: 60px !important;
 }
 
 .swiper-button-prev {
-  background-image: url(../images/nav-prev.svg);
-  top: 40% !important;
+  top: 39.75% !important;
+  transform: rotate(180deg);
 }
 
 .swiper-button-next {
   top: 59% !important;
 }
 
+.swiper-button-next:active,
+.swiper-button-prev:active {
+  background-image: url(../images/nav-arrow-active.svg);
+}
+
 .swiper-pagination-bullets {
-  right: 2% !important;
+  right: 1.4% !important;
 }
 
 .swiper-pagination-bullet {
@@ -166,10 +156,61 @@ p {
 }
 
 .swiper-pagination .swiper-pagination-bullet {
-  background-color: white !important;
+  background-color: #fff !important;
   opacity: 0.3 !important;
 }
 
 .swiper-pagination .swiper-pagination-bullet-active {
   opacity: 1 !important;
+}
+
+/* Title slide */
+
+.title-slide {
+  background: radial-gradient(96.3% 87.1% at 100% 0%, #9402ee 0%, #0d003a 71.35%);
+}
+
+.title-slide .ar {
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 32px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 435px;
+  width: 100%;
+}
+
+.title-slide .en {
+  font-size: 20px;
+  letter-spacing: 8.75px;
+  line-height: 32px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 515px;
+  width: 100%;
+}
+
+.title-slide .separator {
+  background: linear-gradient(90deg, rgba(13, 0, 58, 0) -0.88%, #9402ee 40.37%, #eee2ff 49.77%, #9402ee 57.6%, rgba(13, 0, 58, 0) 99.37%);
+  height: 3px;
+  left: 538px;
+  position: absolute;
+  top: 515px;
+  width: 845px;
+}
+
+/* Fipbook-specific gradients */
+
+.flipbook-example-forest .title-slide {
+  background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
+}
+
+.flipbook-example-forest .separator {
+  background-image: linear-gradient(90deg, #ffe2e2 -0.87%, #f00 1.21%, #0d003a 82.66%, #0d003a 99.37%);
+}
+
+.flipbook-example-forest .title-slide .separator {
+  background: linear-gradient(90deg, rgba(13, 0, 58, 0) -0.88%, #f00 44.55%, #fff 51.34%, #f00 57.08%, rgba(13, 0, 58, 0) 99.37%);
 }

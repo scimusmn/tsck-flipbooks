@@ -6,6 +6,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useIdleTimer } from 'react-idle-timer';
 import Video from '../../components/Video';
 
 import 'swiper/swiper-bundle.min.css';
@@ -70,32 +71,34 @@ const Flipbook = ({ data }) => {
     ar: arContent.slides[i],
   }));
 
+  // Inactivity timeout
+  useIdleTimer({
+    timeout: 1000 * 75,
+    debounce: 500,
+    startOnMount: false,
+    onIdle: () => window.location.reload(false),
+  });
+
   const getAltText = (altObj) => {
     if (altObj) return altObj.altText;
     return 'Image';
   };
 
   const renderTitleSlide = (slide) => (
-    <SwiperSlide key={slide.id}>
-      <div className="title-slide">
-        <div className="separator" />
-        {/* Render title for each locale */}
-        {Object.keys(slide).map((locale) => (
-          <div className={locale} key={locale}>
-            <h1>{slide[locale].title}</h1>
-          </div>
-        ))}
-      </div>
+    <SwiperSlide key={slide.en.id} className="title-slide">
+      <div className="separator" />
+      {Object.keys(slide).map((locale) => (
+        <h1 className={locale} key={locale}>{slide[locale].title}</h1>
+      ))}
     </SwiperSlide>
   );
 
   const renderSlides = slides.map((slide) => {
-    // If only title field exists, render as a "Title Slide"
-    const isTitleSlide = !slide.en.media && !slide.en.body;
-    if (isTitleSlide) return (renderTitleSlide(slide));
+    // If only Title field exists, render as Title Slide
+    if (!slide.en.media && !slide.en.body) return (renderTitleSlide(slide));
 
     return (
-      <SwiperSlide key={slide.id}>
+      <SwiperSlide key={slide.en.id}>
         {({ isActive }) => (
           <div>
             {/* Render title/body for each locale */}
@@ -103,7 +106,9 @@ const Flipbook = ({ data }) => {
               <div className={locale} key={locale}>
                 <h2>{slide[locale].title}</h2>
                 <div className="separator" />
-                {renderRichText(slide[locale].body)}
+                <div className="body">
+                  {renderRichText(slide[locale].body)}
+                </div>
               </div>
             ))}
             {/* Media */}

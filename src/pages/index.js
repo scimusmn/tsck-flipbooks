@@ -23,7 +23,7 @@ const IndexPage = () => {
       <h1>TSCK Flipbooks</h1>
       <ul>
         {allSitePage.edges.map((edge) => (
-          <li>
+          <li key={edge.node.path}>
             <Link to={edge.node.path}>
               <h2>{edge.node.path}</h2>
             </Link>
