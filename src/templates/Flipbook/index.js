@@ -16,37 +16,10 @@ SwiperCore.use([Pagination, Navigation]);
 
 export const SlideTypes = graphql`
   fragment SlideTypes on ContentfulSlideContentfulTitleSlideUnion {
-    __typename
     ... on ContentfulTitleSlide {
       __typename
       id
       title
-      body {
-        raw
-      }
-      media {
-        credit
-        altText {
-          altText
-        }
-        media {
-          file {
-            contentType
-            url
-          }
-          localFile {
-            publicURL
-            childImageSharp {
-              gatsbyImageData(
-                width: 950
-                height: 1080
-                layout: FIXED
-                placeholder: BLURRED
-              )
-            }
-          }
-        }
-      }
     }
     ... on ContentfulSlide {
       __typename
@@ -137,12 +110,8 @@ const Flipbook = ({ data }) => {
   );
 
   const renderSlides = slides.map((slide) => {
-    // If only Title field exists, render as Title Slide
-
     // eslint-disable-next-line no-underscore-dangle
-    const isTitleSlide = slide.en.__typename === 'ContentfulTitleSlide';
-    console.log('isTitleSlide', isTitleSlide);
-    if (isTitleSlide) return renderTitleSlide(slide);
+    if (slide.en.__typename === 'ContentfulTitleSlide') return renderTitleSlide(slide);
 
     return (
       <SwiperSlide key={slide.en.id}>
@@ -151,7 +120,7 @@ const Flipbook = ({ data }) => {
             {/* Render title/body for each locale */}
             {Object.keys(slide).map((locale) => (
               <div className={locale} key={locale}>
-                <h2>{slide[locale].title}</h2>
+                <h2>{(slide[locale].title && slide[locale].title) || null}</h2>
                 <div className="separator" />
                 <div className="body">
                   {(slide[locale].body && renderRichText(slide[locale].body)) || null}
