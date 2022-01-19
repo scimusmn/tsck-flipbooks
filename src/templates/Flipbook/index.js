@@ -14,7 +14,7 @@ import 'swiper/swiper.min.css';
 
 SwiperCore.use([Pagination, Navigation]);
 
-export const SlideTypes = graphql`
+export const slideTypes = graphql`
   fragment SlideTypes on ContentfulSlideContentfulTitleSlideUnion {
     ... on ContentfulTitleSlide {
       __typename
@@ -80,7 +80,7 @@ export const pageQuery = graphql`
 const Flipbook = ({ data }) => {
   const { enContent, arContent } = data;
 
-  // Create array of multi-locale slides
+  // Array of multi-locale slides
   const slides = enContent.slides.map((slide, i) => ({
     en: enContent.slides[i],
     ar: arContent.slides[i],
@@ -117,7 +117,7 @@ const Flipbook = ({ data }) => {
       <SwiperSlide key={slide.en.id}>
         {({ isActive }) => (
           <div>
-            {/* Render title/body for each locale */}
+            {/* Title and body for each locale */}
             {Object.keys(slide).map((locale) => (
               <div className={locale} key={locale}>
                 <h2>{(slide[locale].title && slide[locale].title) || null}</h2>
@@ -151,20 +151,19 @@ const Flipbook = ({ data }) => {
   });
 
   return (
-    <div className={enContent.slug}>
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={1}
-        centeredSlides
-        navigation
-        direction="vertical"
-        pagination={{
-          clickable: true,
-        }}
-      >
-        {renderSlides}
-      </Swiper>
-    </div>
+    <Swiper
+      spaceBetween={0}
+      slidesPerView={1}
+      centeredSlides
+      navigation
+      direction="vertical"
+      pagination={{
+        clickable: true,
+      }}
+      className={enContent.slug}
+    >
+      {renderSlides}
+    </Swiper>
   );
 };
 
