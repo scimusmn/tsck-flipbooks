@@ -14,10 +14,11 @@ import 'swiper/swiper.min.css';
 
 SwiperCore.use([Pagination, Navigation]);
 
-export const pageQuery = graphql`
-  fragment FlipbookFragment on ContentfulFlipbook {
-    slug
-    slides {
+export const SlideTypes = graphql`
+  fragment SlideTypes on ContentfulSlideContentfulTitleSlideUnion {
+    __typename
+    ... on ContentfulTitleSlide {
+      __typename
       id
       title
       body {
@@ -47,6 +48,47 @@ export const pageQuery = graphql`
         }
       }
     }
+    ... on ContentfulSlide {
+      __typename
+      id
+      title
+      body {
+        raw
+      }
+      media {
+        credit
+        altText {
+          altText
+        }
+        media {
+          file {
+            contentType
+            url
+          }
+          localFile {
+            publicURL
+            childImageSharp {
+              gatsbyImageData(
+                width: 950
+                height: 1080
+                layout: FIXED
+                placeholder: BLURRED
+              )
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const pageQuery = graphql`
+  fragment FlipbookFragment on ContentfulFlipbook {
+    slug
+    inactivityTimeout
+    slides {
+      ...SlideTypes
+    }
   } 
   query ($slug: String!) {
     enContent:contentfulFlipbook(
@@ -72,8 +114,9 @@ const Flipbook = ({ data }) => {
   }));
 
   // Inactivity timeout
+  const { inactivityTimeout } = enContent;
   useIdleTimer({
-    timeout: 1000 * 75,
+    timeout: 1000 * inactivityTimeout,
     debounce: 500,
     startOnMount: false,
     onIdle: () => window.location.reload(false),
@@ -95,7 +138,11 @@ const Flipbook = ({ data }) => {
 
   const renderSlides = slides.map((slide) => {
     // If only Title field exists, render as Title Slide
-    if (!slide.en.media && !slide.en.body) return (renderTitleSlide(slide));
+
+    // eslint-disable-next-line no-underscore-dangle
+    const isTitleSlide = slide.en.__typename === 'ContentfulTitleSlide';
+    console.log('isTitleSlide', isTitleSlide);
+    if (isTitleSlide) return renderTitleSlide(slide);
 
     return (
       <SwiperSlide key={slide.en.id}>
@@ -107,25 +154,27 @@ const Flipbook = ({ data }) => {
                 <h2>{slide[locale].title}</h2>
                 <div className="separator" />
                 <div className="body">
-                  {renderRichText(slide[locale].body)}
+                  {(slide[locale].body && renderRichText(slide[locale].body)) || null}
                 </div>
               </div>
             ))}
             {/* Media */}
-            <div className="media">
-              {
-              (slide.en.media.media.file.contentType).includes('video')
-                ? <Video src={slide.en.media.media.localFile.publicURL} active={isActive} />
-                : (
-                  <GatsbyImage
-                    image={getImage(slide.en.media.media.localFile)}
-                    alt={getAltText(slide.en.media.altText)}
-                    loading="eager"
-                  />
-                )
-              }
-              <span className="credit">{slide.en.media.credit}</span>
-            </div>
+            {slide.en.media && (
+              <div className="media">
+                {
+                (slide.en.media.media.file.contentType).includes('video')
+                  ? <Video src={slide.en.media.media.localFile.publicURL} active={isActive} />
+                  : (
+                    <GatsbyImage
+                      image={getImage(slide.en.media.media.localFile)}
+                      alt={getAltText(slide.en.media.altText)}
+                      loading="eager"
+                    />
+                  )
+                }
+                <span className="credit">{slide.en.media.credit}</span>
+              </div>
+            )}
           </div>
         )}
       </SwiperSlide>
