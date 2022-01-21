@@ -201,7 +201,7 @@ p {
   width: 845px;
 }
 
-/* Fipbook-specific gradients */
+/* Flipbook-specific gradients */
 
 .flipbook-example-forest .title-slide {
   background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
@@ -213,4 +213,26 @@ p {
 
 .flipbook-example-forest .title-slide .separator {
   background: linear-gradient(90deg, rgba(13, 0, 58, 0) -0.88%, #f00 44.55%, #fff 51.34%, #f00 57.08%, rgba(13, 0, 58, 0) 99.37%);
+}
+
+/* Home page cards */
+
+.cards-container {
+  margin: 3%;
+  width: 90%;
+}
+
+.card {
+  background: radial-gradient(93.07% 84.18% at 100% 0%, rgb(238, 238, 238) 0%, #e3def5 71.35%);
+  border: white 1px solid;
+  border-radius: 10px;
+  box-shadow: #0d003a 0 0 10px;
+  color: #0d003a;
+  cursor: pointer;
+  float: left;
+  height: 300px;
+  margin: 2%;
+  padding: 1.5%;
+  text-align: left;
+  width: 20%;
 }

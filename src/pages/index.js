@@ -1,5 +1,15 @@
 import React from 'react';
-import { graphql, useStaticQuery, Link } from 'gatsby';
+import {
+  graphql, useStaticQuery, Link, navigate,
+} from 'gatsby';
+
+function toTitleCase(str) {
+  const sentence = str.substring(1).toLowerCase().split('-');
+  for (let i = 0; i < sentence.length; i += 1) {
+    sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+  }
+  return sentence.join(' ');
+}
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -19,17 +29,24 @@ const IndexPage = () => {
   const { allSitePage } = data;
 
   return (
-    <div style={{ padding: '15% 15%' }}>
+    <div className="cards-container">
       <h1>TSCK Flipbooks</h1>
-      <ul>
-        {allSitePage.edges.map((edge) => (
-          <li key={edge.node.path}>
-            <Link to={edge.node.path}>
-              <h2>{edge.node.path}</h2>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {allSitePage.edges.map((edge, i) => (
+        <div
+          role="button"
+          onClick={() => navigate(edge.node.path)}
+          onKeyPress={() => navigate(edge.node.path)}
+          tabIndex={i}
+          className="card"
+          key={edge.node.path}
+        >
+          <h1>📖</h1>
+          <h2>{toTitleCase(edge.node.path)}</h2>
+          <Link to={edge.node.path} key={edge.node.path}>
+            {edge.node.path}
+          </Link>
+        </div>
+      ))}
     </div>
   );
 };
