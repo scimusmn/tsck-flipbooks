@@ -4,8 +4,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import '@fontsource/open-sans';
+import '@fontsource/open-sans/300.css';
+import '@fontsource/open-sans/400.css';
 import '@fontsource/tajawal';
+import '@fontsource/tajawal/300.css';
+import '@fontsource/tajawal/500.css';
+import '@fontsource/tajawal/700.css';
 import '@fontsource/montserrat';
+import '@fontsource/montserrat/500.css';
 
 import './src/styles/index.css';
 

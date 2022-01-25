@@ -89,7 +89,7 @@ const Flipbook = ({ data }) => {
   // Inactivity timeout
   const { inactivityTimeout } = enContent;
   useIdleTimer({
-    timeout: 1000 * inactivityTimeout,
+    timeout: inactivityTimeout * 1000,
     debounce: 500,
     startOnMount: false,
     onIdle: () => window.location.reload(false),
@@ -119,7 +119,7 @@ const Flipbook = ({ data }) => {
           <div>
             {/* Title and body for each locale */}
             {Object.keys(slide).map((locale) => (
-              <div className={locale} key={locale}>
+              <div className={`${locale} text-container`} key={locale}>
                 <h2>{(slide[locale].title && slide[locale].title) || null}</h2>
                 <div className="separator" />
                 <div className="body">

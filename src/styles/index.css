@@ -26,58 +26,68 @@ p {
   font-family: "Tajawal", sans-serif;
 }
 
+.ar.text-container {
+  position: absolute;
+  right: 214px;
+  top: 140px;
+  width: 620px;
+}
+
 .ar h2 {
   font-size: 30px;
   font-weight: 700;
-  height: 65px;
-  left: 1115px;
-  position: absolute;
-  top: 150px;
-  width: 560px;
+  margin-right: 32px;
+  width: 90%;
 }
 
-.ar .body {
-  left: 1131px;
+.ar .body p {
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-right: 32px;
+  width: 90%;
+}
+
+.en.text-container {
+  left: 1085px;
   position: absolute;
-  top: 215px;
-  width: 545px;
+  top: 605px;
+  width: 650px;
 }
 
 .en h2 {
   font-family: "Montserrat", sans-serif;
-  height: 98px;
-  left: 1114px;
+  font-weight: 500;
   letter-spacing: 8.75px;
-  position: absolute;
+  line-height: 32px !important;
+  margin-left: 32px;
   text-transform: uppercase;
-  top: 624px;
-  width: 607px;
+  width: 90%;
 }
 
-.en .body {
-  height: 194px;
-  left: 1114px;
-  position: absolute;
-  top: 722px;
-  width: 560px;
+.en .body p {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
+  margin-left: 32px;
+  width: 90%;
 }
 
 .separator {
   background-image: linear-gradient(90deg, #fff -0.87%, #9402ee 1.21%, #0d003a 82.66%, #0d003a 99.37%);
   height: 3px;
-  position: absolute;
+  margin-bottom: 38px;
+  margin-top: 32px;
+  opacity: 0.65;
   width: 571px;
 }
 
 .ar .separator {
-  left: 1135px;
-  top: 215px;
+  right: 218px;
   transform: rotate(-180deg);
 }
 
 .en .separator {
-  left: 1085px;
-  top: 722px;
   transform: rotate(0deg);
 }
 
@@ -172,23 +182,27 @@ p {
 
 .title-slide .ar {
   font-size: 50px;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: 2px;
   line-height: 32px;
   position: absolute;
   text-align: center;
   text-transform: uppercase;
-  top: 435px;
+  top: 37%;
   width: 100%;
 }
 
 .title-slide .en {
-  font-size: 20px;
-  letter-spacing: 8.75px;
-  line-height: 32px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 12.25px;
+  line-height: 61px;
   position: absolute;
   text-align: center;
   text-transform: uppercase;
-  top: 515px;
+  top: 50%;
   width: 100%;
 }
 
@@ -196,8 +210,9 @@ p {
   background: linear-gradient(90deg, rgba(13, 0, 58, 0) -0.88%, #9402ee 40.37%, #eee2ff 49.77%, #9402ee 57.6%, rgba(13, 0, 58, 0) 99.37%);
   height: 3px;
   left: 538px;
+  opacity: 0.65;
   position: absolute;
-  top: 515px;
+  top: 44.4%;
   width: 845px;
 }
 
