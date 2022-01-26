@@ -30,7 +30,7 @@ const IndexPage = () => {
 
   return (
     <div className="cards-container">
-      <h1>TSCK Flipbooks</h1>
+      <h1>TSCK - Robosapiens Flipbooks</h1>
       {allSitePage.edges.map((edge, i) => (
         <div
           role="button"

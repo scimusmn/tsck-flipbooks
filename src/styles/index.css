@@ -216,17 +216,17 @@ p {
   width: 845px;
 }
 
-/* Flipbook-specific gradients */
+/* slug-specific gradients and accents */
 
-.flipbook-example-forest .title-slide {
+[class$="mind-control"] .title-slide {
   background: radial-gradient(93.07% 84.18% at 100% 0%, #f00 0%, #0d003a 71.35%);
 }
 
-.flipbook-example-forest .separator {
+[class$="mind-control"] .separator {
   background-image: linear-gradient(90deg, #ffe2e2 -0.87%, #f00 1.21%, #0d003a 82.66%, #0d003a 99.37%);
 }
 
-.flipbook-example-forest .title-slide .separator {
+[class$="mind-control"] .title-slide .separator {
   background: linear-gradient(90deg, rgba(13, 0, 58, 0) -0.88%, #f00 44.55%, #fff 51.34%, #f00 57.08%, rgba(13, 0, 58, 0) 99.37%);
 }
 
