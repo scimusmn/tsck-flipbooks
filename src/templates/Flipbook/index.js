@@ -128,7 +128,7 @@ const Flipbook = ({ data }) => {
               </div>
             ))}
             {/* Media */}
-            {slide.en.media && (
+            {(slide.en.media && slide.en.media.media)(
               <div className="media">
                 {
                 (slide.en.media.media.file.contentType).includes('video')
@@ -142,7 +142,7 @@ const Flipbook = ({ data }) => {
                   )
                 }
                 <span className="credit">{slide.en.media.credit}</span>
-              </div>
+              </div>,
             )}
           </div>
         )}
