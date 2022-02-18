@@ -27,6 +27,7 @@ exports.createPages = async ({ actions, graphql }) => {
         edges {
           node {
             slug
+            node_locale
           }
         }
       }
@@ -51,8 +52,9 @@ exports.createPages = async ({ actions, graphql }) => {
           component: path.resolve(pageType.template),
           context: {
             slug: node.slug,
+            locale: node.node_locale,
           },
-          path: pageType.slugPrefix + node.slug,
+          path: `${pageType.slugPrefix + node.node_locale}/${node.slug}`,
         });
       }
     });
