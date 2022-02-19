@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 // import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 // import { renderRichText } from 'gatsby-source-contentful/rich-text';
@@ -80,8 +80,10 @@ export const pageQuery = graphql`
   }
 `;
 
-const Flipbook = ({ data }) => {
+const Flipbook = ({ data, pageContext, location }) => {
   console.log('Page data:', data);
+  console.log('Page context:', pageContext);
+  console.log('Page location:', location);
 
   const localeNodes = data.allContentfulFlipbook.edges.map((edge) => edge.node);
   console.log('Locale nodes:', localeNodes);
@@ -100,6 +102,16 @@ const Flipbook = ({ data }) => {
             <p key={slide.id}>{slide.title}</p>
           ))}
         </div>
+      ))}
+      { pageContext.toggleLocales && pageContext.toggleLocales.map((toggleLocale) => (
+        <Link
+          key={toggleLocale}
+          to={`/${toggleLocale}/${pageContext.slug}`}
+          style={{ color: 'yellow' }}
+          activeStyle={{ color: 'red' }}
+        >
+          <h1>{intlNames.of(toggleLocale)}</h1>
+        </Link>
       ))}
     </div>
   );
@@ -193,6 +205,8 @@ const Flipbook = ({ data }) => {
 
 Flipbook.propTypes = {
   data: PropTypes.objectOf(PropTypes.object).isRequired,
+  pageContext: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default Flipbook;

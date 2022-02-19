@@ -5742,6 +5742,13 @@ gatsby-recipes@^1.2.0:
     xstate "^4.9.1"
     yoga-layout-prebuilt "^1.9.6"
 
+gatsby-source-contentful-locales@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-source-contentful-locales/-/gatsby-source-contentful-locales-1.0.3.tgz#8a6d7f2cf32d83a8218651f2b79a34d3d241db28"
+  integrity sha512-spsOMOcj6urfNaVQcJripivD9y0DQNp+UsFwEGw6TRITGyVQaNZjPkgkq4UGQzeIavc8LsNfolxwRcjhgYM6NA==
+  dependencies:
+    node-fetch "^2.6.0"
+
 gatsby-source-contentful@7.3.2:
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-7.3.2.tgz#ec24177e5f3c0be8ac5912ec75b563bccfb6a410"
@@ -8705,6 +8712,13 @@ node-fetch@^2.5.0, node-fetch@^2.6.1, node-fetch@^2.6.6:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.6.tgz#1751a7c01834e8e1697758732e9efb6eeadfaf89"
   integrity sha512-Z8/6vRlTUChSdIgMa51jxQ4lrw/Jy5SOW10ObaA47/RElsAN2c5Pn8bTgFGWn/ibwzXTE8qwr1Yzx28vsecXEA==
+  dependencies:
+    whatwg-url "^5.0.0"
+
+node-fetch@^2.6.0:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
+  integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
 
