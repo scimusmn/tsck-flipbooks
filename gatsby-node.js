@@ -52,7 +52,8 @@ exports.createPages = async ({ actions, graphql }) => {
           component: path.resolve(pageType.template),
           context: {
             slug: node.slug,
-            locale: node.node_locale,
+            // locale: node.node_locale,
+            locales: ['ar', 'en-US'],
           },
           path: `${pageType.slugPrefix + node.node_locale}/${node.slug}`,
         });

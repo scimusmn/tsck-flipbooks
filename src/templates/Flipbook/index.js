@@ -64,26 +64,42 @@ export const pageQuery = graphql`
       ...SlideTypes
     }
   } 
-  query ($slug: String!, $locale: String!) {
-    contentfulFlipbook(
-      node_locale: {eq: $locale },
-      slug: { eq: $slug }) {
-        ...FlipbookFragment
+  query ($slug: String!, $locales: [String]) {
+    allContentfulFlipbook(
+      filter: {
+        slug: { eq: $slug }
+        node_locale: { in: $locales }
       }
+    ) {
+      edges {
+        node {
+          ...FlipbookFragment
+        }
+      }
+    }
   }
 `;
 
 const Flipbook = ({ data }) => {
-  console.log('Locale Flipbook');
-  console.log(data);
+  console.log('Page data:', data);
+
+  const localeNodes = data.allContentfulFlipbook.edges.map((edge) => edge.node);
+  console.log('Locale nodes:', localeNodes);
+
+  const intlNames = new Intl.DisplayNames('en', { type: 'language', languageDisplay: 'dialect' });
 
   return (
     <div>
       LOCALE PAGE
-      {' ---> '}
-      {data.contentfulFlipbook.node_locale}
-      {data.contentfulFlipbook.slides.map((slide) => (
-        <p key={slide.id} className={data.contentfulFlipbook.node_locale}>{slide.title}</p>
+      {localeNodes.map((locale) => (
+        <div key={locale.node_locale} className={locale.node_locale}>
+          <h1>
+            {intlNames.of(locale.node_locale)}
+          </h1>
+          {locale.slides.map((slide) => (
+            <p key={slide.id}>{slide.title}</p>
+          ))}
+        </div>
       ))}
     </div>
   );
