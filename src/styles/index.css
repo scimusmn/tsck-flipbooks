@@ -251,3 +251,23 @@ p {
   text-align: left;
   width: 20%;
 }
+
+/* Language toggles */
+
+.locale-toggle {
+  background-color: gray;
+  border-radius: 5px;
+  color: white;
+  font-size: 24px;
+  margin-left: 0;
+  padding: 20px;
+  text-decoration: none;
+}
+
+.locale-toggle.ar::after {
+  content: " 🇰🇼";
+}
+
+.locale-toggle.en-US::after {
+  content: " 🇺🇸";
+}

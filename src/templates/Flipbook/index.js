@@ -65,6 +65,15 @@ export const pageQuery = graphql`
     }
   } 
   query ($slug: String!, $locales: [String]) {
+    allContentfulLocale {
+      edges {
+        node {
+          code
+          name
+          default
+        }
+      }
+    }
     allContentfulFlipbook(
       filter: {
         slug: { eq: $slug }
@@ -88,11 +97,15 @@ const Flipbook = ({ data, pageContext, location }) => {
   const localeNodes = data.allContentfulFlipbook.edges.map((edge) => edge.node);
   console.log('Locale nodes:', localeNodes);
 
+  const localesInfo = data.allContentfulLocale.edges.map((edge) => edge.node);
+  const otherLocales = localesInfo.filter((locale) => !pageContext.locales.includes(locale.code));
+  console.log('localesInfo:', localesInfo);
+  console.log('otherLocales:', otherLocales);
+
   const intlNames = new Intl.DisplayNames('en', { type: 'language', languageDisplay: 'dialect' });
 
   return (
     <div>
-      LOCALE PAGE
       {localeNodes.map((locale) => (
         <div key={locale.node_locale} className={locale.node_locale}>
           <h1>
@@ -103,14 +116,14 @@ const Flipbook = ({ data, pageContext, location }) => {
           ))}
         </div>
       ))}
-      { pageContext.toggleLocales && pageContext.toggleLocales.map((toggleLocale) => (
+      { otherLocales && otherLocales.map((localeInfo) => (
         <Link
-          key={toggleLocale}
-          to={`/${toggleLocale}/${pageContext.slug}`}
-          style={{ color: 'yellow' }}
-          activeStyle={{ color: 'red' }}
+          key={localeInfo.code}
+          to={`/${localeInfo.code}/${pageContext.slug}`}
+          className={`locale-toggle ${localeInfo.code}`}
         >
-          <h1>{intlNames.of(toggleLocale)}</h1>
+          {intlNames.of(localeInfo.code)}
+          {/* {localeInfo.name} */}
         </Link>
       ))}
     </div>
