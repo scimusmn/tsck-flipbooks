@@ -1,4 +1,4 @@
 # TSCK Digital Flipbooks
-Touchscreen flipbooks in the Robosapiens exhibit.
+Touchscreen flipbooks for the Robosapiens exhibit.
 
 
