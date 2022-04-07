@@ -1,0 +1,34 @@
+[
+  {
+    "ts": "2022-04-06T20:58:35.841Z",
+    "level": "error",
+    "error": {
+      "originalError": {
+        "name": "NotFound",
+        "message": "{\n  \"status\": 404,\n  \"statusText\": \"Not Found\",\n  \"message\": \"The resource could not be found.\",\n  \"details\": {\n    \"type\": \"Space\",\n    \"id\": \"hubpsgd24nbn\"\n  },\n  \"request\": {\n    \"url\": \"hubpsgd24nbn\",\n    \"headers\": {\n      \"Accept\": \"application/json, text/plain, */*\",\n      \"Content-Type\": \"application/vnd.contentful.management.v1+json\",\n      \"X-Contentful-User-Agent\": \"app contentful.cli/1.4.17; feature space-export; sdk contentful-management.js/5.27.3; platform node.js/v14.19.0; os macOS/20.3.0;\",\n      \"Authorization\": \"Bearer ...dxQhg\",\n      \"user-agent\": \"node.js/v14.19.0\",\n      \"Accept-Encoding\": \"gzip\"\n    },\n    \"method\": \"get\"\n  },\n  \"requestId\": \"9470b496-3e6c-4c8a-8386-f6cfe2b35ecf\"\n}"
+      },
+      "data": {
+        "status": 404,
+        "statusText": "Not Found",
+        "message": "The resource could not be found.",
+        "details": {
+          "type": "Space",
+          "id": "hubpsgd24nbn"
+        },
+        "request": {
+          "url": "hubpsgd24nbn",
+          "headers": {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/vnd.contentful.management.v1+json",
+            "X-Contentful-User-Agent": "app contentful.cli/1.4.17; feature space-export; sdk contentful-management.js/5.27.3; platform node.js/v14.19.0; os macOS/20.3.0;",
+            "Authorization": "Bearer ...dxQhg",
+            "user-agent": "node.js/v14.19.0",
+            "Accept-Encoding": "gzip"
+          },
+          "method": "get"
+        },
+        "requestId": "9470b496-3e6c-4c8a-8386-f6cfe2b35ecf"
+      }
+    }
+  }
+]

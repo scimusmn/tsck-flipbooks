@@ -48,14 +48,14 @@ p {
   width: 90%;
 }
 
-.en.text-container {
+.en-US.text-container {
   left: 1085px;
   position: absolute;
   top: 605px;
   width: 650px;
 }
 
-.en h2 {
+.en-US h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   letter-spacing: 8.75px;
@@ -65,7 +65,7 @@ p {
   width: 90%;
 }
 
-.en .body p {
+.en-US .body p {
   font-size: 20px;
   font-weight: 300;
   line-height: 32px;
@@ -87,7 +87,7 @@ p {
   transform: rotate(-180deg);
 }
 
-.en .separator {
+.en-US .separator {
   transform: rotate(0deg);
 }
 
@@ -192,7 +192,7 @@ p {
   width: 100%;
 }
 
-.title-slide .en {
+.title-slide .en-US {
   font-family: "Montserrat", sans-serif;
   font-size: 35px;
   font-style: normal;
@@ -254,20 +254,57 @@ p {
 
 /* Language toggles */
 
-.locale-toggle {
-  background-color: gray;
+.locale-buttons {
+  /* background-color: red; */
+  border-radius: 5px;
+  bottom: 2%;
+  position: fixed;
+  right: 0%;
+  z-index: 99;
+}
+
+.locale-button {
+  background-color: #8a04e1;
   border-radius: 5px;
   color: white;
-  font-size: 24px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  font-size: 21px !important;
+  margin: 15px;
   margin-left: 0;
-  padding: 20px;
+  padding: 5px;
+  padding-left: 25px;
+  padding-right: 25px;
   text-decoration: none;
 }
 
-.locale-toggle.ar::after {
+.locale-button.ar::after {
   content: " 🇰🇼";
 }
 
-.locale-toggle.en-US::after {
+.locale-button.en-US::after {
   content: " 🇺🇸";
+}
+
+.locale-button.es::after {
+  content: " 🇲🇽";
+}
+
+.locale-button.ja::after {
+  content: " 🇯🇵";
+}
+
+.locale-button.fr::after {
+  content: " 🇫🇷";
+}
+
+.es {
+  color: aqua !important;
+}
+
+.ja {
+  color: greenyellow !important;
+}
+
+.fr {
+  color: yellow !important;
 }
