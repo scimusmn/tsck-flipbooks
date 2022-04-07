@@ -101,6 +101,11 @@ const Flipbook = ({ data, pageContext, location }) => {
   // Array of multi-locale slides
   const slides = localeNodes[0].slides.map((slide, i) => localeNodes.map((node) => node.slides[i]));
 
+  const localesInfo = data.allContentfulLocale.edges.map((edge) => edge.node);
+  // Filter out current locale
+  const buttonLocales = localesInfo.filter((locale) => !pageContext.locales.includes(locale.code));
+  const intlNames = new Intl.DisplayNames('en', { type: 'language', languageDisplay: 'dialect' });
+
   // Inactivity timeout
   const { inactivityTimeout } = localeNodes[0];
   useIdleTimer({
@@ -110,11 +115,6 @@ const Flipbook = ({ data, pageContext, location }) => {
     onIdle: () => window.location.reload(false),
   });
 
-  const localesInfo = data.allContentfulLocale.edges.map((edge) => edge.node);
-  // Filter out current locale
-  const otherLocales = localesInfo.filter((locale) => !pageContext.locales.includes(locale.code));
-  const intlNames = new Intl.DisplayNames('en', { type: 'language', languageDisplay: 'dialect' });
-
   const getAltText = (altObj) => {
     if (altObj) return altObj.altText;
     return 'Image';
@@ -122,14 +122,13 @@ const Flipbook = ({ data, pageContext, location }) => {
 
   const renderLocaleButtons = () => (
     <div className="locale-buttons">
-      { otherLocales && otherLocales.map((localeInfo) => (
+      { buttonLocales && buttonLocales.map((localeInfo) => (
         <Link
           key={localeInfo.code}
           to={`/${localeInfo.code}/${pageContext.slug}`}
           className={`locale-button ${localeInfo.code}`}
         >
           {intlNames.of(localeInfo.code)}
-          {/* {localeInfo.name} */}
         </Link>
       ))}
     </div>
